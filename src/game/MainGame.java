@@ -11,6 +11,7 @@ public class MainGame  {
 	static Player white = new Player("White", game.Color.WHITE);
 	static Player black = new Player("Black", game.Color.BLACK);
 	static GameWindow gw;
+	static boolean unitSelected = false;
 	static boolean bUnitSelected = false;
 	static Unit selectedUnit = null;
 	
@@ -74,6 +75,16 @@ public class MainGame  {
 	}
 	
 	public static void mouseClicked(int x, int y) {
+		if(!gb.getCell(x, y).isEmpty()) {
+			selectedUnit = gb.getCell(x,y).getUnit();
+			selectedUnit.setSelected(true);
+			List<Cell> moves = validateMoves(selectedUnit.possibleMoves());
+			for(Cell cell : moves) {
+				cell.setSelected(true);
+				gw.paintAgain();
+			}
+		}
+
 		if(!gb.getCell(x, y).isEmpty()) {
 			if(bUnitSelected) {
 				selectedUnit.setSelected(false);
