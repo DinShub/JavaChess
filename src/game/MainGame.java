@@ -1,5 +1,8 @@
 package game;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import game.units.*;
 import gui.GameWindow;
 
@@ -8,7 +11,12 @@ public class MainGame  {
 	static Player white = new Player("White", game.Color.WHITE);
 	static Player black = new Player("Black", game.Color.BLACK);
 	static GameWindow gw;
+<<<<<<< HEAD
 	static boolean unitSelected = false;
+=======
+	static boolean bUnitSelected = false;
+	static Unit selectedUnit = null;
+>>>>>>> d907888... Added moves for Pawn and Knight.
 	
 	public static void main(String[] args) {
 		
@@ -70,6 +78,7 @@ public class MainGame  {
 	}
 	
 	public static void mouseClicked(int x, int y) {
+<<<<<<< HEAD
 		Unit selectedUnit;
 		if(!gb.getCell(x, y).isEmpty()) {
 			selectedUnit = gb.getCell(x,y).getUnit();
@@ -80,6 +89,67 @@ public class MainGame  {
 				gw.paintAgain();
 			}
 		}
+=======
+		if(!gb.getCell(x, y).isEmpty()) {
+			if(bUnitSelected) {
+				selectedUnit.setSelected(false);
+				gb.clearSelected();
+			}
+			selectedUnit = gb.getCell(x,y).getUnit();
+			selectedUnit.setSelected(true);
+			bUnitSelected = true;
+			List<Cell> moves = validateMoves(selectedUnit.possibleMoves());
+			for(Cell cell : moves) {
+				cell.setSelected(true);
+			}
+		}
+		else {
+			bUnitSelected = false;
+			selectedUnit = null;
+			gb.clearSelected();
+		}
+		gw.paintAgain();
+	}
+	
+	private static List<Cell> validateMoves(List<int[]> moves) {
+		List<Cell> newList = new ArrayList<Cell>();
+		switch(selectedUnit.getType()) {
+		case PAWN:
+		for(int[] coords : moves) {
+			Cell cell = gb.getCell(coords[0], coords[1]);
+			Color c = selectedUnit.getOwner().getColor();
+			if(selectedUnit.getCell().getLocation().getX() == cell.getLocation().getX()) {
+				if(cell.isEmpty())
+					newList.add(cell);
+			}
+			else {
+				if(!cell.isEmpty()) {
+					if(cell.getUnit().getOwner().getColor() != c)
+						newList.add(cell);
+				}
+			}
+		}break;
+		default:	for(int[] coords : moves) {
+			if(legitCoords(coords)) {
+				Cell cell = gb.getCell(coords[0], coords[1]);
+				Color c = selectedUnit.getOwner().getColor();
+				if(cell.isEmpty())
+					newList.add(cell);
+				else if(cell.getUnit().getOwner().getColor() != c)
+					newList.add(cell);
+			}
+		}
+		}
+		return newList;
+	}
+	
+	private static boolean legitCoords(int[] coords) {
+		if(coords[0] > 7 || coords[0] < 0)
+			return false;
+		if(coords[1] > 7 || coords[1] < 0)
+			return false;
+		return true;
+>>>>>>> d907888... Added moves for Pawn and Knight.
 	}
 	
 }

@@ -1,5 +1,10 @@
 package game.units;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+
 import game.Cell;
 import game.Color;
 import game.GameBoard;
@@ -21,6 +26,7 @@ public class Pawn extends Unit {
 		}
 	}
 	
+<<<<<<< HEAD
 	public Cell[] possibleMoves() {
 		Cell[] moves;
 		if(bFirstMove)
@@ -46,5 +52,26 @@ public class Pawn extends Unit {
 		}
 		return moves;
 	}
+=======
+	public List<int[]> possibleMoves() {
+		List<int[]> moves = new ArrayList<int[]>();
+		switch(this.sOwner.getColor()) {
+		case WHITE: if(bFirstMove)	moves.add(new int[] {x, y+2});
+		moves.add(new int[] {x, y+1});
+		moves.add(new int[] {x+1, y+1});
+		moves.add(new int[] {x-1, y+1});
+		break;
+		case BLACK:if(bFirstMove)	moves.add(new int[] {x, y-2});
+		moves.add(new int[] {x, y-1});
+		moves.add(new int[] {x+1, y-1});
+		moves.add(new int[] {x-1, y-1}); 
+		break;
+		}
+		
+		return moves;
+	}
+	
+	
+>>>>>>> d907888... Added moves for Pawn and Knight.
 	
 }

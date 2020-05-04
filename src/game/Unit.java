@@ -1,5 +1,8 @@
 package game;
 
+import java.util.List;
+import java.util.Set;
+
 public class Unit {
 	
 	/*	The abstract class for all the unit type
@@ -38,8 +41,9 @@ public class Unit {
 	public void setSelected(boolean flag) {	this.bSelected = flag;	}
 	
 	
-	public Cell[] possibleMoves() {
+	public List<int[]> possibleMoves() {
 		return null;
 	}
+
 	
 }
