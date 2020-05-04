@@ -3,11 +3,12 @@ package game;
 import game.units.*;
 import gui.GameWindow;
 
-public class MainGame {
+public class MainGame  {
 	static GameBoard gb = new GameBoard();
 	static Player white = new Player("White", game.Color.WHITE);
 	static Player black = new Player("Black", game.Color.BLACK);
 	static GameWindow gw;
+	static boolean unitSelected = false;
 	
 	public static void main(String[] args) {
 		
@@ -67,5 +68,18 @@ public class MainGame {
 	public static void initGameWindow() {
 		gw = new GameWindow(1024, 720, gb);
 	}
-
+	
+	public static void mouseClicked(int x, int y) {
+		Unit selectedUnit;
+		if(!gb.getCell(x, y).isEmpty()) {
+			selectedUnit = gb.getCell(x,y).getUnit();
+			selectedUnit.setSelected(true);
+			Cell[] moves = selectedUnit.possibleMoves();
+			for(Cell cell : moves) {
+				cell.setSelected(true);
+				gw.paintAgain();
+			}
+		}
+	}
+	
 }

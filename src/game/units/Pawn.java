@@ -21,6 +21,30 @@ public class Pawn extends Unit {
 		}
 	}
 	
-	
+	public Cell[] possibleMoves() {
+		Cell[] moves;
+		if(bFirstMove)
+			moves = new Cell[2];
+		else
+			moves = new Cell[1];
+		switch(sOwner.getColor()) {
+		case WHITE: if(bFirstMove) {
+			moves[0] = gB.getCell(x, y+1);
+			moves[1] = gB.getCell(x, y+2);
+		}
+		else
+			moves[0] = gB.getCell(x, y+1);
+		break;
+		case BLACK: if(bFirstMove) {
+			moves[0] = gB.getCell(x, y-1);
+			moves[1] = gB.getCell(x, y-2);
+		}
+		else
+			moves[0] = gB.getCell(x, y-1);
+		break;
+			
+		}
+		return moves;
+	}
 	
 }

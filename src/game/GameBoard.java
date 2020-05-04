@@ -22,5 +22,6 @@ public class GameBoard {
 	
 	public void setUnit(int x, int y, Unit unit) {
 		this.cBoard[x + y*8].setUnit(unit);
+		this.cBoard[x + y*8].setEmpty(false);
 	}
 }

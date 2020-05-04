@@ -16,6 +16,7 @@ public class Unit {
 	protected String img;
 	protected int x;
 	protected int y;
+	protected boolean bSelected = false;
 	
 	public Unit(Player _owner, Cell _cell, GameBoard _gB) {
 		this.sOwner = _owner;
@@ -30,9 +31,11 @@ public class Unit {
 	public Cell getCell()	{	return this.cCell;	}
 	public Units getType()		{ 	return this.Type;	}
 	public String getImg()		{ 	return this.img;	}
+	public boolean isSelected()	{	return this.bSelected;}
 	
 	public void setOwner(Player _owner)	{	this.sOwner = _owner;	}
 	public void setCell(Cell _cell)	{	this.cCell = _cell;	}
+	public void setSelected(boolean flag) {	this.bSelected = flag;	}
 	
 	
 	public Cell[] possibleMoves() {

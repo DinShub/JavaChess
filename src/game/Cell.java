@@ -14,7 +14,7 @@ public class Cell {
 	private Unit uUnit = null;
 	private Coord sName;
 	private Color sColor;
-	
+	private boolean bIsSelected = false;
 	
 	public Cell(int _x, int _y) {
 		this.sName = new Coord(_x, _y);
@@ -27,10 +27,12 @@ public class Cell {
 	public Coord getLocation()	{	return this.sName;	}
 	public String getCoord()	{	return this.sName.getCoord();}
 	public Color getColor()	{	return this.sColor;	}
+	public boolean isSelected()	{	return this.bIsSelected;	}
 	
 	public void setEmpty(boolean _flag)		{	this.bIsEmpty = _flag;	}
 	public void setUnit(Unit _unit)			{	this.uUnit = _unit;		}
 	public void setColor(game.Color c) 		{	this.sColor = c;		}
+	public void setSelected(boolean flag)	{	this.bIsSelected = flag;}
 	
 	private void setColor()	{
 		if(this.sName.getX() % 2 == this.sName.getY() % 2)
