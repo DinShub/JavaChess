@@ -23,13 +23,10 @@ public class GameBoard {
 	public void setUnit(int x, int y, Unit unit) {
 		this.cBoard[x + y*8].setUnit(unit);
 		this.cBoard[x + y*8].setEmpty(false);
-<<<<<<< HEAD
-=======
 	}
 	
 	public void clearSelected() {
 		for(Cell cell : cBoard)
 			cell.setSelected(false);
->>>>>>> d907888... Added moves for Pawn and Knight.
 	}
 }

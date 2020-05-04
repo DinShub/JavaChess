@@ -26,33 +26,6 @@ public class Pawn extends Unit {
 		}
 	}
 	
-<<<<<<< HEAD
-	public Cell[] possibleMoves() {
-		Cell[] moves;
-		if(bFirstMove)
-			moves = new Cell[2];
-		else
-			moves = new Cell[1];
-		switch(sOwner.getColor()) {
-		case WHITE: if(bFirstMove) {
-			moves[0] = gB.getCell(x, y+1);
-			moves[1] = gB.getCell(x, y+2);
-		}
-		else
-			moves[0] = gB.getCell(x, y+1);
-		break;
-		case BLACK: if(bFirstMove) {
-			moves[0] = gB.getCell(x, y-1);
-			moves[1] = gB.getCell(x, y-2);
-		}
-		else
-			moves[0] = gB.getCell(x, y-1);
-		break;
-			
-		}
-		return moves;
-	}
-=======
 	public List<int[]> possibleMoves() {
 		List<int[]> moves = new ArrayList<int[]>();
 		switch(this.sOwner.getColor()) {
@@ -72,6 +45,5 @@ public class Pawn extends Unit {
 	}
 	
 	
->>>>>>> d907888... Added moves for Pawn and Knight.
 	
 }

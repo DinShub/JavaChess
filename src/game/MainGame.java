@@ -11,12 +11,8 @@ public class MainGame  {
 	static Player white = new Player("White", game.Color.WHITE);
 	static Player black = new Player("Black", game.Color.BLACK);
 	static GameWindow gw;
-<<<<<<< HEAD
-	static boolean unitSelected = false;
-=======
 	static boolean bUnitSelected = false;
 	static Unit selectedUnit = null;
->>>>>>> d907888... Added moves for Pawn and Knight.
 	
 	public static void main(String[] args) {
 		
@@ -78,18 +74,6 @@ public class MainGame  {
 	}
 	
 	public static void mouseClicked(int x, int y) {
-<<<<<<< HEAD
-		Unit selectedUnit;
-		if(!gb.getCell(x, y).isEmpty()) {
-			selectedUnit = gb.getCell(x,y).getUnit();
-			selectedUnit.setSelected(true);
-			Cell[] moves = selectedUnit.possibleMoves();
-			for(Cell cell : moves) {
-				cell.setSelected(true);
-				gw.paintAgain();
-			}
-		}
-=======
 		if(!gb.getCell(x, y).isEmpty()) {
 			if(bUnitSelected) {
 				selectedUnit.setSelected(false);
@@ -149,7 +133,6 @@ public class MainGame  {
 		if(coords[1] > 7 || coords[1] < 0)
 			return false;
 		return true;
->>>>>>> d907888... Added moves for Pawn and Knight.
 	}
 	
 }
