@@ -41,9 +41,12 @@ public class Unit {
 	public void setSelected(boolean flag) {	this.bSelected = flag;	}
 	
 	
-	public List<int[]> possibleMoves() {
+	public List<Cell> possibleMoves() {
 		return null;
 	}
 
+	private boolean validateMove(int x, int y) {
+		return true;
+	}
 	
 }

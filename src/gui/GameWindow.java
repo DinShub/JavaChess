@@ -112,7 +112,14 @@ public class GameWindow extends JFrame implements ActionListener, MouseListener 
 				selected = gb.getBoard()[coords[0] + coords[1]*8].getUnit();
 				System.out.println(selected.getType());
 			}
-			MainGame.mouseClicked(coords[0], coords[1]);
+			if(e.getButton() == e.BUTTON1) {
+				System.out.println("Left Mouse");
+				MainGame.mouseClicked(coords[0], coords[1]);
+			}
+			else if(e.getButton() == e.BUTTON3) {
+				System.out.println("Right Mouse");
+				MainGame.rightMouseClicked(coords[0], coords[1]);
+			}
 		}
 	}
 	

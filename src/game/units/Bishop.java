@@ -1,6 +1,10 @@
 package game.units;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import game.Cell;
+import game.Coord;
 import game.GameBoard;
 import game.Player;
 import game.Unit;
@@ -20,6 +24,51 @@ public class Bishop extends Unit {
 		}
 	}
 
+	public List<Cell> possibleMoves() {
+		List<Cell> moves = new ArrayList<Cell>();
+		for(int i = 1; i <= 7; i++) {
+			if(this.x+i <= 7 && this.y+i <= 7) {
+				if(!gB.getCell(this.x +i, this.y + i).isEmpty()) {
+					if(gB.getCell(this.x + i, this.y + i).getUnit().getOwner().getColor() != this.sOwner.getColor())
+						moves.add(gB.getCell(this.x + i, this.y + i));
+					break;
+				}
+				moves.add(gB.getCell(x+i, y+i));
+			}
+		}
+		for(int i = 1; i <= 7; i++) {
+			if(this.x-i >= 0 && this.y-i >= 0) {
+				if(!gB.getCell(this.x -i, this.y - i).isEmpty()) {
+					if(gB.getCell(this.x - i, this.y - i).getUnit().getOwner().getColor() != this.sOwner.getColor())
+						moves.add(gB.getCell(this.x - i, this.y - i));
+					break;
+				}
+				moves.add(gB.getCell(x-i, y-i));
+			}
+		}
+		for(int i = 1; i <= 7; i++) {
+			if(this.x+i <= 7 && this.y-i >= 0) {
+				if(!gB.getCell(this.x +i, this.y - i).isEmpty()) {
+					if(gB.getCell(this.x + i, this.y - i).getUnit().getOwner().getColor() != this.sOwner.getColor())
+						moves.add(gB.getCell(this.x - i, this.y + i));
+					break;
+				}
+				moves.add(gB.getCell(x+i, y-i));
+			}
+		}
+		for(int i = 1; i <= 7; i++) {
+			if(this.x-i >= 0 && this.y+i <= 7) {
+				if(!gB.getCell(this.x -i, this.y + i).isEmpty()) {
+					if(gB.getCell(this.x - i, this.y + i).getUnit().getOwner().getColor() != this.sOwner.getColor())
+						moves.add(gB.getCell(this.x - i, this.y + i));
+					break;
+				}
+				moves.add(gB.getCell(x-i, y+i));
+			}
+		}
+		return moves;
+	}
 	
 
+	
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import game.Cell;
+import game.Coord;
 import game.GameBoard;
 import game.Player;
 import game.Unit;
@@ -23,19 +24,32 @@ public class Knight extends Unit {
 		}
 	}
 	
-	public List<int[]> possibleMoves() {
-		List<int[]> moves = new ArrayList<int[]>();
+	public List<Cell> possibleMoves() {
+		List<Cell> moves = new ArrayList<Cell>();
 		
-		moves.add(new int[] {x+2, y+1});
-		moves.add(new int[] {x-2, y+1});
-		moves.add(new int[] {x+2, y-1});
-		moves.add(new int[] {x-2, y-1});
-		moves.add(new int[] {x+1, y+2});
-		moves.add(new int[] {x-1, y+2});
-		moves.add(new int[] {x+1, y-2});
-		moves.add(new int[] {x-1, y-2});
+		if(validateMove(x+2, y+1))	moves.add(gB.getCell(x+2, y+1));
+		if(validateMove(x-2, y+1))	moves.add(gB.getCell(x-2, y+1));
+		if(validateMove(x+2, y-1))	moves.add(gB.getCell(x+2, y-1));
+		if(validateMove(x-2, y-1))	moves.add(gB.getCell(x-2, y-1));
+		if(validateMove(x+1, y+2))	moves.add(gB.getCell(x+1, y+2));
+		if(validateMove(x-1, y+2))	moves.add(gB.getCell(x-1, y+2));
+		if(validateMove(x+1, y-2))	moves.add(gB.getCell(x+1, y-2));
+		if(validateMove(x-1, y-2))	moves.add(gB.getCell(x-1, y-2));
 		
 		return moves;
+	}
+	
+	private boolean validateMove(int x, int y) {
+		if(x > 7 || x < 0)
+			return false;
+		if(y > 7 || y < 0)
+			return false;
+		if(!gB.getCell(x, y).isEmpty())
+			if(gB.getCell(x, y).getUnit().getOwner().getColor() == this.sOwner.getColor())
+				return false;
+		
+		
+		return true;
 	}
 	
 }

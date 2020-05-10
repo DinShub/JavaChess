@@ -7,6 +7,7 @@ import java.util.Set;
 
 import game.Cell;
 import game.Color;
+import game.Coord;
 import game.GameBoard;
 import game.Player;
 import game.Unit;
@@ -26,24 +27,39 @@ public class Pawn extends Unit {
 		}
 	}
 	
-	public List<int[]> possibleMoves() {
-		List<int[]> moves = new ArrayList<int[]>();
+	public List<Cell> possibleMoves() {
+		List<Cell> moves = new ArrayList<Cell>();
 		switch(this.sOwner.getColor()) {
-		case WHITE: if(bFirstMove)	moves.add(new int[] {x, y+2});
-		moves.add(new int[] {x, y+1});
-		moves.add(new int[] {x+1, y+1});
-		moves.add(new int[] {x-1, y+1});
+		case WHITE: if(bFirstMove)	if(validateMove(x, y+2)) moves.add(gB.getCell(x, y+2));
+		if(validateMove(x, y+1)) moves.add(gB.getCell(x, y+1));
+		if(validateMove(x+1, y+1)) moves.add(gB.getCell(x+1, y+1));
+		if(validateMove(x-1, y+1)) moves.add(gB.getCell(x-1, y+1));
 		break;
-		case BLACK:if(bFirstMove)	moves.add(new int[] {x, y-2});
-		moves.add(new int[] {x, y-1});
-		moves.add(new int[] {x+1, y-1});
-		moves.add(new int[] {x-1, y-1}); 
+		case BLACK:if(bFirstMove)	if(validateMove(x, y-2)) moves.add(gB.getCell(x, y-2));
+		if(validateMove(x, y-1)) moves.add(gB.getCell(x, y-1));
+		if(validateMove(x+1, y-1)) moves.add(gB.getCell(x+1, y-1));
+		if(validateMove(x-1, y-1)) moves.add(gB.getCell(x-1, y-1));
 		break;
 		}
 		
 		return moves;
 	}
 	
-	
+	private boolean validateMove(int x, int y) {
+		if(x > 7 || x < 0)
+			return false;
+		if(y > 7 || y < 0)
+			return false;
+		if(x == this.x && (y == this.y +1 || y == this.y +2 || y == this.y-1 || y == this.y -2))
+			if(!gB.getCell(x, y).isEmpty())
+				return false;
+		if(x == this.x+1 || x== this.x-1)
+			if(gB.getCell(x, y).isEmpty())
+				return false;
+			else if(gB.getCell(x, y).getUnit().getOwner().getColor() == this.sOwner.getColor())
+				return false;
+		
+		return true;
+	}
 	
 }
